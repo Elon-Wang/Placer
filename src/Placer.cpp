@@ -62,7 +62,6 @@ void Placer::annealing(int detail_level){
                 random = rand() % (xSize * ySize);
             }
             
-            // Node *tmp = &NN[rand() % (xSize * ySize)];
             cells[cnt] = Cell(cnt, &NN[random]);
         }
 
@@ -85,13 +84,9 @@ void Placer::annealing(int detail_level){
     iter = ceil(10 * powf(numOfCell, 1.333));
     if (detail_level>=2) {
         //TODO modify the text
-        printf("avg:%f\nsum:%f\ndeviation:%f\nTemp:%f\niter:%d\n",avg,sum,deviation,Temp,iter);    
+        printf("avg:%f  sum:%f  deviation:%f  Temp:%f  iter:%d\n",avg,sum,deviation,Temp,iter);    
         printf("start annealing!\n");
     }
-
-    // char text1[50];
-    // char text2[100];
-    // long long swapCnt =0;
 
     if (detail_level == 3) {
         sprintf(text1,"Initial Placement. Total_iter:%d",iter);
@@ -135,7 +130,7 @@ void Placer::annealing(int detail_level){
         Temp = 0.7 * Temp -0.01;
     }
 
-    printf("annealing finished\ntotal swapcnt:%lld\titer:%d\n",swapCnt,iter);
+    printf("annealing finished\ntotal swapcnt:%lld\titer:%d\tWirelength:%d\n",swapCnt,iter,getGlobalWirelength(numOfWire, wires));
     if (detail_level==3) {
         totalWL = getGlobalWirelength(numOfWire, wires);
         sprintf(text1,"Final placement layout");
